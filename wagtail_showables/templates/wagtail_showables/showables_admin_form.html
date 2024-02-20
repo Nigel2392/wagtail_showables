@@ -1,0 +1,92 @@
+{% extends "wagtailadmin/base.html" %}
+
+{% load i18n %}
+
+{% block titletag %}{% translate "Showable Blocks Form" %}{% endblock %}
+
+{% block content %}
+
+<div class="wagtail-showables-container">
+    {% translate "Enable/Disable Blocks" as title %}
+    {% include "wagtailadmin/shared/header.html" with title=title icon="view" %}
+
+    <div class="wagtail-showables-registry-form nice-padding">
+        {% if page_types %}
+            <h2>{% translate "Usable for the following page types" %}</h2>
+            <ul>
+                {% for typ in page_types %}
+                    <li>{{ typ.name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form method="post" action="{% url 'wagtail_showables_enable_disable_blocks' %}">
+            {% csrf_token %}
+            <div class="wagtail-showables-registry-form__fields">
+                <table class="wagtail-showables-registry-form__fields__table">
+                    <tr>
+                        {% for f in form.showable_fields %}
+                            <td class="wagtail-showables-registry-form__field__input">
+                                {{ f.label }}
+                            </td>
+                        {% endfor %}
+                        <td class="wagtail-showables-registry-data">
+                            
+                        </td>
+                    </tr>
+                    {% for field in form %}
+                        <tr>
+                            {{ field }}
+                            <td class="wagtail-showables-registry-data">
+                                <div class="field-label-wrapper">
+                                    <h3>{{ field.label_tag }}</h3>
+                                </div>
+                                <div class="field-help-wrapper">
+                                    {% if field.help_text %}
+                                        <p class="help">{{ field.help_text }}</p>
+                                    {% endif %}
+                                    <small>{{ field.name }}</small>    
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="wagtail-showables-registry-form__submit">
+                <button type="button" class="button button-secondary">{% translate "All" %}</button>
+                <button type="submit" class="button button-primary">{% translate "Save" %}</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const allText = '{% translate "All" %}';
+            const noneText = '{% translate "None" %}';
+            const allButton = document.querySelector('.wagtail-showables-registry-form__submit button.button-secondary');
+            const inputs = document.querySelectorAll('.wagtail-showables-registry-form__fields tr td:first-of-type input[type="checkbox"]');
+            const form = document.querySelector('.wagtail-showables-registry-form form');
+
+            let allChecked = true;
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('change', function() {
+                    allButton.textContent = Array.from(inputs).every(input => input.checked) ? noneText : allText;
+                });
+                allChecked = allChecked && inputs[i].checked;
+            }
+
+            allButton.textContent = allChecked ? noneText : allText;
+
+            allButton.addEventListener('click', function() {
+                const checked = allButton.textContent === allText;
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].checked = checked;
+                }
+                allButton.textContent = checked ? noneText : allText;
+            });
+        });
+    </script>
+{% endblock %}

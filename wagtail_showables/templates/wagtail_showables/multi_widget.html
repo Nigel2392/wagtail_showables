@@ -1,0 +1,7 @@
+{% for subwidget in widget.subwidgets %}
+    {% with widget=subwidget %}
+        <td class="wagtail-showables-registry-form__field__input">
+            {% include widget.template_name %}
+        </td>
+    {% endwith %}
+{% endfor %}

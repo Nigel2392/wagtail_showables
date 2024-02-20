@@ -1,0 +1,112 @@
+.wagtail-showables-disabled {
+    outline: 2px solid var(--w-color-critical-200);
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+.wagtail-showables-disabled.wagtail-showables-show-interaction,
+.wagtail-showables-disabled.wagtail-showables-no-interaction {
+    /* Disable selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+    position: relative;
+    pointer-events: none;
+}
+.wagtail-showables-disabled.wagtail-showables-show-interaction input,
+.wagtail-showables-disabled.wagtail-showables-no-interaction input {
+    pointer-events: none !important;
+    
+}
+.wagtail-showables-disabled.wagtail-showables-show-interaction .struct-block.goodadvice-collapsible button,
+.wagtail-showables-disabled.wagtail-showables-no-interaction .struct-block.goodadvice-collapsible button {
+    pointer-events: auto;
+}
+
+.wagtail-showables-disabled.wagtail-showables-no-interaction > * {
+    filter: blur(4px);
+}
+
+.wagtail-showables-disabled.wagtail-showables-no-interaction::after {
+    content: var(--disabled-text, "This content is disabled");
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--w-color-critical-200);
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: underline;
+    z-index: 1;
+}
+.wagtail-showables-container .wagtail-showables-registry-item-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5em;
+    gap: 0.5em;
+}
+
+.wagtail-showables-registered-item-shown {
+    color: var(--w-color-info-100);
+}
+.wagtail-showables-registered-item-hidden {
+    color: var(--w-color-critical-200);
+}
+.wagtail-showables-container .wagtail-showables-registry-item h2 {
+    vertical-align: middle;
+    
+}
+.wagtail-showables-container .wagtail-showables-registry-item svg {
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: middle;
+}
+.wagtail-showables-registry-form__field {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--w-color-info-100);
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    gap: 0.5em;
+}
+.wagtail-showables-registry-form__fields__table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1em;
+}
+.wagtail-showables-registry-form__fields__table tr {
+    border-bottom: 1px solid var(--w-color-info-100);
+}
+.wagtail-showables-registry-form__fields__table tr:not(:first-child) td {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+}
+.wagtail-showables-registry-form__fields__table tr td:last-child {
+    padding-left: 1em;
+}
+.field-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+.field-label-wrapper h3 {
+    margin: 0;
+}
+.field-help-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.field-help-wrapper p {
+    margin: 0;
+}
+
+.wagtail-showables-registry-data {
+    display: flex;
+    flex-direction: column;
+}

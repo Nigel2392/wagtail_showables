@@ -1,0 +1,43 @@
+{% extends "wagtailadmin/base.html" %}
+
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}{% translate "Showable Blocks" %}{% endblock %}
+
+{% block content %}
+
+<div class="wagtail-showables-container">
+    {% translate "Wagtail Showables Blocks" as title %}
+    {% include "wagtailadmin/shared/header.html" with title=title icon="view" %}
+    {% translate "Displaying" as display_text %}
+    {% translate "Hidden" as hidden_text %}
+
+    <div class="wagtail-showables-registry-list nice-padding">
+        {% if "wagtail_showables.can_toggle_showing" in perms %}
+            <a href="{% url 'wagtail_showables_enable_disable_blocks' %}" class="button button-small button-secondary">
+                {% translate "Edit active blocks" %}
+            </a>
+        {% endif %}
+        {% for registered in registry %}
+
+            <div class="wagtail-showables-registry-item">
+                <div class="wagtail-showables-registry-item-heading">
+                    {% if registered.is_shown %}
+                        <div class="wagtail-showables-registered-item-shown" title="{{ display_text }}">
+                            {% icon name="view" title=display_text %}
+                        </div>
+                    {% else %}
+                        <div class="wagtail-showables-registered-item-hidden" title="{{ hidden_text }}">
+                            {% icon name="no-view" title=hidden_text %}
+                        </div>
+                    {% endif %}
+                    <h2>{{ registered.label }}</h2>
+                </div>
+                <small>{{ registered.import_path }}</small>
+                <p>{{ registered.help_text }}</p>
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}
