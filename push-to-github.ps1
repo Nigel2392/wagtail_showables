@@ -1,4 +1,4 @@
-$ProjectName = "wagtail_feedback"
+$ProjectName = "wagtail_showables"
 
 
 function IsNumeric ($Value) {
