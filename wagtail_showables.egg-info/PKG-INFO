@@ -1,10 +1,13 @@
 Metadata-Version: 2.1
-Name: wagtail-showables
-Version: 1.1.2
+Name: wagtail_showables
+Version: 1.1.4
 Summary: A Wagtail application to disable and enable blocks.
+Home-page: https://github.com/Nigel2392/wagtail_showables
 Author: Nigel
 Author-email: nigel@goodadvice.it
 License: GPL-3.0-only
+Project-URL: Bug Tracker, https://github.com/Nigel2392/wagtail_showables/issues
+Project-URL: Source, https://github.com/Nigel2392/wagtail_showables
 Classifier: Environment :: Web Environment
 Classifier: Framework :: Django
 Classifier: Framework :: Django :: 4.2
@@ -25,6 +28,8 @@ Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: Django>=4.2
+Requires-Dist: Wagtail>=5.2
 
 wagtail_showables
 =================
